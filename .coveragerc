@@ -1,0 +1,8 @@
+[run]
+source = share_projects
+omit = share_projects/wsgi.py,share_projects/urls.py,share_projects/startup.py,share_projects/settings*
+branch = true
+
+[report]
+omit = share_projects/wsgi.py,share_projects/urls.py,share_projects/startup.py,share_projects/settings*
+
