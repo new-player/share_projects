@@ -2,7 +2,7 @@
 
 {% load teams_tags %}
 
-{% block head_title %}pinax-project-teams{% endblock %}
+{% block head_title %}Project Hub{% endblock %}
 
 {% block body_class %}home{% endblock %}
 
@@ -63,22 +63,15 @@
         
         {% load announcements_tags %}
 <h3>Announcements</h3>
-{% announcements as announcements_list %}
-{% if announcements_list %}
+{% announcements as announcements_list %} {% if announcements_list %}
 <div class="announcements">
-{% for announcement in announcements_list %}
-<div class="announcement">
-<strong>{{ announcement.title }}</strong><br />
-{{ announcement.content }}
-{% if announcement.dismiss_url %}
-<a href="{{ announcement.dismiss_url }}" class="ajax" data-clear-closest=".announcement">
-Clear
-</a>
-{% endif %}
+	{% for announcement in announcements_list %}
+	<div class="announcement">
+		<strong>{{ announcement.title }}</strong><br /> {{
+		announcement.content }} {% if announcement.dismiss_url %} <a
+			href="{{ announcement.dismiss_url }}" class="ajax"
+			data-clear-closest=".announcement"> Clear </a> {% endif %}
+	</div>
+	{% endfor %}
 </div>
-{% endfor %}
-</div>
-{% endif %}
-        
-    {% endif %}
-{% endblock %}
+{% endif %} {% endif %} {% endblock %}
