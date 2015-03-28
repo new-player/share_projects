@@ -1,26 +1,88 @@
 {% extends "site_base.html" %}
 
 {% load teams_tags %}
+{% load account_tags %}
 
 {% block head_title %}Project Hub{% endblock %}
 
 {% block body_class %}home{% endblock %}
 
+<!--
+{% if user.is_authenticated %}
+                    <div id='cssmenu'>
+<ul>
+   <li><a href="{% url 'home' %}">Home</a></li>
+   <li class='active has-sub'><a href="#">My Projects</a>
+      <ul>
+         <li class='has-sub'><a href='#'>Product 1</a>
+            <ul>
+               <li><a href='#'>Sub Product</a></li>
+               <li><a href='#'>Sub Product</a></li>
+            </ul>
+         </li>
+         <li class='has-sub'><a href='#'>Product 2</a>
+            <ul>
+               <li><a href='#'>Sub Product</a></li>
+               <li><a href='#'>Sub Product</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+   <li><a href="{% url 'team_list' %}">My Projects</a></li>
+   <li><a href='#'>Followers</a></li>
+   <li><a href='#'>Following</a></li>
+</ul>
+</div>
+
+{% endif %}
+-->
 {% block body %}
 
     {% if user.is_authenticated %}
+        <div id="wrapper">
 
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{% url 'profiles_detail' request.user.username %}">
+                        {% user_display request.user %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'team_list' %}">My Projects</a>
+                </li>
+                <li>
+                    <a href='#'>Followers</a>
+                </li>
+                <li>
+                    <a href='#'>Following</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                
         {% available_teams as available_teams %}
         {% if user.memberships.exists or available_teams %}
-            <div class="dashboard-panel">
+            <div class="dashboard-panel">            
                 <div class="dashboard-panel-header">
                     <i class="icon-group"></i>
-                    <h3>Teams</h3>
+                    <h3>Projects</h3>
                 </div>
 
                 <div class="dashboard-panel-content">
                     {% if user.memberships.exists %}
-                        <h4>Your Teams</h4>
+                        <h4>Your Projects</h4>
                         <table class="table table-striped">
                             {% for membership in user.memberships.all %}
                                 <tr>
@@ -60,18 +122,24 @@
                 </div>
             </div>
         {% endif %}
-        
-        {% load announcements_tags %}
-<h3>Announcements</h3>
-{% announcements as announcements_list %} {% if announcements_list %}
-<div class="announcements">
-	{% for announcement in announcements_list %}
-	<div class="announcement">
-		<strong>{{ announcement.title }}</strong><br /> {{
-		announcement.content }} {% if announcement.dismiss_url %} <a
-			href="{{ announcement.dismiss_url }}" class="ajax"
-			data-clear-closest=".announcement"> Clear </a> {% endif %}
-	</div>
-	{% endfor %}
-</div>
-{% endif %} {% endif %} {% endblock %}
+
+
+
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+{% endif %} {% endblock %}
+
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+    
