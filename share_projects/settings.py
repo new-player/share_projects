@@ -11,7 +11,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': { 
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'dev_db',                     
+        'NAME': 'django_db',                     
         'USER': 'root',
         'PASSWORD': '',
     }
