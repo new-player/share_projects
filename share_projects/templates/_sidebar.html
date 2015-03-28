@@ -1,0 +1,32 @@
+{% load account_tags %}
+
+    {% if request.user.is_authenticated %}
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{% url 'profiles_detail' request.user.username %}">
+                        {% user_display request.user %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'team_list' %}">My Projects</a>
+                </li>
+                <li>
+                    <a href='#'>Followers</a>
+                </li>
+                <li>
+                    <a href='#'>Following</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+{% endif %}
+        
